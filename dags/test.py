@@ -2,18 +2,18 @@ from datetime import datetime
 
 from airflow.decorators import dag, task
 
-from newsfeed import dag_start, download_blogs_from_rss
+from src import newsfeed
 
 
 @task(task_id="hello")
 def hello_task() -> None:
     print("HELLO suuup")
-    print(dag_start.get_name())
+    print(newsfeed.dag_start.get_name())
 
 
 @task(task_id="download_blogs_from_rss")
 def download_blogs_from_rss_task() -> None:
-    download_blogs_from_rss.main(blog_name="mit")
+    newsfeed.download_blogs_from_rss.main(blog_name="mit")
 
 
 @dag(
