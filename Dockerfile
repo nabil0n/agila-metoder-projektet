@@ -1,4 +1,4 @@
-FROM apache/airflow:latest-python3.10
+FROM apache/airflow:latest
 
 RUN pip install poetry
 COPY pyproject.toml .
