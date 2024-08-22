@@ -188,6 +188,15 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+
   airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
