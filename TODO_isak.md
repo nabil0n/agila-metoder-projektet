@@ -28,7 +28,14 @@ Saker jag gjort / tänkt på:
 - Allt som allt så tror jag jag gjort tillräckligt för vårt möte imorgonbitti, där jag onekligen kommer själv, eller få hjälp på vägen, inse fler brister i mitt tillvägagångssätt.
 
 **Torsdag 22aug tillsammans**
-- FYLL I HÄR
 - Beslut fattades att poetry är bajs. Nu gör vi vår egen requirements.txt och kör på pip!
 - Det rullar både i build ich airflow, men i airflow är det fortfarande svårt att se vilka dependancies som installerats. "pip list" listar en annan uppsättning paket än de som vi installerat med requirements.txt
 - LYCKA! Att avkommentera rad 52 i docker-compose.yaml (image:...) gjorde att vår pip installerade paketen på rätt ställe i pip list inne i vår airflow env.
+
+**Torsdag 22aug kväll**
+- Jag branchar av för att testa hur @dags skulle kunna komma att bli implementerade.
+- Mappen newsfeed med all kod kopieras tillfälligt in i dags-mappen för att smidigare kunna hänvisa till koden.
+- Först testas bara att jag kan få upp i webinterfacet min test-dag. Det går bra.
+- download_blogs_from_rss verkar också hyffsat enkelt rulla som importerade script i en @task.
+- Lite strul dock med extract_articles; filer skapas, men inget landar i sista steget i .json-filen.
+- Jag löste ovanstående med att justera pydantic syntax i datatypes.py med hjälp av googling. dump_args var en funktion som försvunnit.
