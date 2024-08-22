@@ -22,3 +22,14 @@
 * Mikael: Skriva tester med pytest t.ex. och kolla så att .py-filerna funkar
 * Max: Undersök hur discordbotten fungerar
 * Joakim: Undersök databashanteringen
+
+## Möte 22 aug
+
+### Saker vi gjort
+
+* Isak har mergat in det vi gjorde idag i main, så att rätt image används i airflow och alla dependencies installeras
+* Mikael gjort klart testcases.
+
+### Ansvarsområden / tasks
+
+* Alla sysslar nu med någon form av DAG-implementering. Alla testar sig fram lite till nästa gång, då vi mergar det bästa av våra lärdomar.
