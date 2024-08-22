@@ -27,3 +27,8 @@ Saker jag gjort / tänkt på:
 - Allt rullar. MEN. Jag har inga permissions inne i airflow genom terminalen som handlar om Poetry. Kanske inte behövs? Men känns sisådär. Bör nog lämna det nu iaf då man suttit med nån timma.
 - Allt som allt så tror jag jag gjort tillräckligt för vårt möte imorgonbitti, där jag onekligen kommer själv, eller få hjälp på vägen, inse fler brister i mitt tillvägagångssätt.
 
+**Torsdag 22aug tillsammans**
+- FYLL I HÄR
+- Beslut fattades att poetry är bajs. Nu gör vi vår egen requirements.txt och kör på pip!
+- Det rullar både i build ich airflow, men i airflow är det fortfarande svårt att se vilka dependancies som installerats. "pip list" listar en annan uppsättning paket än de som vi installerat med requirements.txt
+- LYCKA! Att avkommentera rad 52 i docker-compose.yaml (image:...) gjorde att vår pip installerade paketen på rätt ställe i pip list inne i vår airflow env.
