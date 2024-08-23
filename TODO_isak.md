@@ -39,3 +39,13 @@ Saker jag gjort / tänkt på:
 - download_blogs_from_rss verkar också hyffsat enkelt rulla som importerade script i en @task.
 - Lite strul dock med extract_articles; filer skapas, men inget landar i sista steget i .json-filen.
 - Jag löste ovanstående med att justera pydantic syntax i datatypes.py med hjälp av googling. dump_args var en funktion som försvunnit.
+
+**Fredag 23aug kväll**
+- Jag är sugen på att testa langchain och openai summarize.py. Jag börjar därför med att testa om systemet godkänner att jag använder orginalversionerna från projektet; langchain=0.0.221 och openai=0.27.8.
+- Det blev helt kaiko. Jag väljer istället att använda de senaste versionerna i utbyte mot den antagliga oundvikliga huvudvärken senare.
+- Något som saknas är langchain-community. Detta läggs till i requirements.txt.
+- Mer pydantic problematik! I v2 av pydantic finns ej längre parse_file_as(). Hittade denna fantastiska sida https://docs.pydantic.dev/latest/migration/#removed-in-pydantic-v2, men som inte hjälper mig just nu. Istället hittar jag en annan lösning på github.
+- Bra med .env-filer såklart. Men irriterande att inte kunna hitta en bra guide på syntax då inga exempel ligger uppe.
+- Nyckeln läses till sist korrekt, och summeringen fungerar väl. Kommenterade bort article = article[1:] och insåg direkt varför den fanns där.... Detta tar ett tag.
+- Insåg även att i min @dag behöver jag inte retunera något från @task funktionerna. Utan det räcker gott att endast köra main() från varje fil.
+- Summarize.py fungerar nu i min test @dag.

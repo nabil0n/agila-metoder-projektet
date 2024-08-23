@@ -1,6 +1,6 @@
 from airflow.decorators import dag, task
 from pendulum import datetime
-from newsfeed import download_blogs_from_rss, extract_articles
+from newsfeed import download_blogs_from_rss, extract_articles, summarize
 
 
 @dag(
@@ -10,7 +10,7 @@ from newsfeed import download_blogs_from_rss, extract_articles
     catchup=False,
     tags=["IsakTestDag"],
     doc_md=__doc__,
-    default_args={"owner": "Isak", "retries": 1},
+    default_args={"owner": "Isak", "retries": 0},
 )
 
 def tesing_functions():
@@ -18,10 +18,14 @@ def tesing_functions():
     @task()
     def run_newsfeed():
         download_blogs_from_rss.main("mit")
-        articles = extract_articles.main("mit")
-
-        return articles
+        extract_articles.main("mit")
     
     run_newsfeed()
+    
+    @task()
+    def summarize_articles():
+        summarize.main("mit", "default")
+    
+    summarize_articles()
     
 tesing_functions()
