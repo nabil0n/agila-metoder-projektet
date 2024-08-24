@@ -40,7 +40,7 @@ def load_articles(blog_name: str) -> list[BlogInfo]:
 
     return articles
 
-# BROKEN
+# TRASIG, ersatt med ovanstående
 # def load_articles(blog_name: str) -> list[BlogInfo]:
 #     articles = []
 #     save_dir = Path("data/data_warehouse", blog_name, "articles")
@@ -66,7 +66,11 @@ def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSu
     llm = ChatOpenAI(temperature=0, model_name=model_name)
     text_splitter = CharacterTextSplitter()
 
-    articles = articles[:1] # Om denna inte är här så tar det ganska lång tid att genomföra summeringarna.
+    """
+    Om denna inte är här så tar det ganska lång tid att genomföra summeringarna.
+    Då den kontaktar openai för varje artikel. Så kommentera av denna sen i skarpt läge.
+    """
+    articles = articles[:3] # Denna alltså.
 
     summaries = []
     for article in articles:
