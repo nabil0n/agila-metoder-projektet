@@ -19,7 +19,7 @@ Write a concise summary of the following:
 """
 
 NON_TECHNICAL_PROMPT_TEMPLATE = """
-Write a concise, easy to understand, and non techincal summary of the following:
+Write a concise, easy to understand, and non technical summary of the following:
 {text}
 """
 
