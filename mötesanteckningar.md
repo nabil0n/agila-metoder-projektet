@@ -33,3 +33,24 @@
 ### Ansvarsområden / tasks
 
 * Alla sysslar nu med någon form av DAG-implementering. Alla testar sig fram lite till nästa gång, då vi mergar det bästa av våra lärdomar.
+
+## Möte 27 aug
+* Isak fått DAGS att funka. 
+* Kevin undersöker A3
+* Max har fått Discrod bott med tidräkning att fungera.
+* Mikael undersökte också DAGs och fick daggen att starta.
+* Joakim har undersökt databashanteringen lite
+
+### Möte med Raphael
+* Hur göra för att inte köra över varandra om man ska jobba på typ samma sak? Antingen 1) Bryta ner i mindre tasks 2) Parprogrammera 3) Sitta och vänta.
+Agila metoder ska åtgärda så att man utnyttjar tiden, får planera om. 
+"Sprint-abort" i nödfall om det inte går.
+* På Ericsson firas man med tårta om man gör mer än man hade som task
+* Vid mergekonflikt bör man pausa och gå o prata med den andra personen som jobbat på samma sak, istället för att trycka på commit.
+
+### Idéer för att fortsätta förfina: 
+* Gör Unique_id till samma i både sammanfattning och bloggartikel, om strängen finns i original xml som man laddar ner. Om inte, se till att inte ladda ner samma igen på annat sätt. Eller?: Max
+* Gör även en icke-teknisk sammanfattning: Isak
+* Lägg in ytterligare en blogg eller tre att sammanfatta från: Isak 
+* Få DAGs att hitta newsfeed från src/newsfeed: Mikael
+* Få databasen att fungera. Den ska även fungera inifrån DAG: Kevin
