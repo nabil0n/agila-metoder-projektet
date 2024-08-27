@@ -4,7 +4,7 @@ import jsonargparse
 import pydantic
 from discord import SyncWebhook
 from loguru import logger
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
 from newsfeed import log_utils
@@ -39,7 +39,7 @@ def load_summaries(blog_name: str) -> list[BlogSummary]:
 #     return summaries
 
 def send_to_discord(summary: BlogSummary) -> None:
-    load_dotenv()
+    # load_dotenv()
     #logger.debug(f"Sending summary to Discord: {summary.title} _step1_")
     discord_webhook_url = os.environ.get("DISCORD_WEBHOOK_URL")
     webhook = SyncWebhook.from_url(discord_webhook_url)

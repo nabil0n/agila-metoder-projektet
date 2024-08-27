@@ -21,17 +21,17 @@ def tesing_functions():
     def run_newsfeed():
         download_blogs_from_rss.main(blog_name)
         extract_articles.main(blog_name)
-        return pendulum.now()
+        # return pendulum.now()
     
     @task()
     def summarize_articles():
         summarize.main(blog_name, "default")
-        return pendulum.now()
+        # return pendulum.now()
     
     @task()
     def send():
         send_to_discord.main(blog_name)
-        return pendulum.now()
+        # return pendulum.now()
     
     # run_newsfeed()
     # summarize_articles()
