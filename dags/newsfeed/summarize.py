@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import dotenv
+from dotenv import load_dotenv
 import jsonargparse
 import pydantic
 from langchain.chains.summarize import load_summarize_chain
@@ -33,10 +33,22 @@ def load_articles(blog_name: str) -> list[BlogInfo]:
     articles = []
     save_dir = Path("data/data_warehouse", blog_name, "articles")
     for article_file in save_dir.glob("**/*.json"):
-        article = pydantic.parse_file_as(BlogInfo, article_file)
+        with open(article_file, "r") as f:
+            json_data = f.read()
+        article = BlogInfo.model_validate_json(json_data)
         articles.append(article)
 
     return articles
+
+# TRASIG, ersatt med ovanstående
+# def load_articles(blog_name: str) -> list[BlogInfo]:
+#     articles = []
+#     save_dir = Path("data/data_warehouse", blog_name, "articles")
+#     for article_file in save_dir.glob("**/*.json"):
+#         article = pydantic.parse_file_as(BlogInfo, article_file)
+#         articles.append(article)
+
+#     return articles
 
 
 def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
@@ -45,15 +57,20 @@ def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
     for summary in summaries:
         save_path = save_dir / summary.filename
         with open(save_path, "w") as f:
-            f.write(summary.json(indent=2))
+            f.write(summary.to_json())
 
 
 def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSummary]:
+    load_dotenv()
     model_name = "gpt-3.5-turbo"
     llm = ChatOpenAI(temperature=0, model_name=model_name)
     text_splitter = CharacterTextSplitter()
 
-    articles = articles[:1]  # TODO: Remove
+    """
+    Om denna inte är här så tar det ganska lång tid att genomföra summeringarna.
+    Då den kontaktar openai för varje artikel. Så kommentera av denna sen i skarpt läge.
+    """
+    articles = articles[3:6] # Denna alltså.
 
     summaries = []
     for article in articles:
@@ -87,7 +104,7 @@ def parse_args() -> jsonargparse.Namespace:
 
 
 if __name__ == "__main__":
-    dotenv.load_dotenv("cfg/dev.env")
+    # dotenv.load_dotenv("../cfg/dev.env")
     args = parse_args()
     log_utils.configure_logger(log_level="DEBUG")
     main(**args)
