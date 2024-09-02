@@ -7,7 +7,6 @@ import os
 
 load_dotenv()
 TOKEN = os.environ.get('DISC_TOKEN')
-# TOKEN = 'MTI3NTgwNTE5NjEwNjA3NjE5Mw.GyNwsO.rfiZCJQ0hZggyQZg0ycriikd23DL7DEadisKsk'
 CHANNEL_ID = 1275809359045070970 #HEJJEJEJEJ
 MAX_SESSION_TIME_MINUTES = 2
 
