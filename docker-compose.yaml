@@ -196,6 +196,9 @@ services:
     environment:
       - SERVICES=s3
       - DEBUG=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
 
   airflow-init:
     <<: *airflow-common
@@ -298,3 +301,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  localstack-data:

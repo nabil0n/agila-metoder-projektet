@@ -2,16 +2,15 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 from airflow.models import Variable
-from ..src import newsfeed
+from newsfeed.data_warehouse.database_utils import create_connection, load_articles, create_articles_table
 import boto3
 import logging
 from datetime import timedelta
 
-# connection = newsfeed.data_warehouse.database_utils.create_connection
 
-S3_BUCKET = Variable.get("S3_BUCKET", "my_local_bucket")
-S3_PREFIX = Variable.get("S3_PREFIX", "data_lake/")
-LOCALSTACK_ENDPOINT = Variable.get("LOCALSTACK_ENDPOINT", "http://localhost:4566")
+S3_BUCKET = Variable.get("S3_BUCKET", "my-local-bucket")
+S3_PREFIX = Variable.get("S3_PREFIX", "data-lake/")
+LOCALSTACK_ENDPOINT = Variable.get("LOCALSTACK_ENDPOINT", "http://localstack:4566")
 
 def get_s3_client():
     return boto3.client(
@@ -19,8 +18,12 @@ def get_s3_client():
         endpoint_url=LOCALSTACK_ENDPOINT,
         aws_access_key_id="test",
         aws_secret_access_key="test",
-        region_name="eu-north-1",
+        region_name="us-east-1",
     )
+
+def initialize_database(**kwargs):
+    create_articles_table()
+    logging.info("Database initialized")
 
 def create_local_bucket(**kwargs):
     s3_client = get_s3_client()
@@ -34,7 +37,7 @@ def create_local_bucket(**kwargs):
         raise
 
 
-def upload_blog_text(**kawrgs):
+def upload_blog_text(**kwargs):
     s3_client = get_s3_client()
     articles = load_articles()
 
@@ -52,7 +55,7 @@ def upload_blog_text(**kawrgs):
 
     return s3_urls
 
-def update_database(**kwargs):
+def update_database_with_s3_urls(**kwargs):
     connection, cursor = create_connection()
     try:
         ti = kwargs['ti']
@@ -77,7 +80,7 @@ def update_database(**kwargs):
         cursor.close()
         connection.close()
 
-defualt_args = {
+default_args = {
     'start_date': days_ago(1),
     'retries': 3,
     'retry_delay': timedelta(minutes=5)
@@ -85,8 +88,8 @@ defualt_args = {
 
 with DAG(
     's3_compatibility',
-    default_args=defualt_args,
-    schedule_interval='@daily',
+    default_args=default_args,
+    schedule="0 12 * * *",
     catchup=False
 ) as dag:
     
@@ -100,10 +103,15 @@ with DAG(
         python_callable=upload_blog_text
     )
 
-    update_database = PythonOperator(
-        task_id='update_database',
-        python_callable=update_database
+    initialize_db = PythonOperator(
+        task_id='initialize_database',
+        python_callable=initialize_database
     )
 
-    create_bucket >> upload_to_s3 >> update_database
+    update_database_dag = PythonOperator(
+        task_id='update_database',
+        python_callable=update_database_with_s3_urls
+    )
+
+    create_bucket >> initialize_db >> upload_to_s3 >> update_database_dag
 

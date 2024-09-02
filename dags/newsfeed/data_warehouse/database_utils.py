@@ -3,13 +3,14 @@ import psycopg2
 
 from newsfeed.datatypes import BlogInfo
 
-TABLE_NAME = "iths.articles"
+SCHEMA_NAME = "iths"
+TABLE_NAME = "articles"
 
 
 def create_connection() -> tuple[psycopg2.extensions.connection, psycopg2.extensions.cursor]:
     # Establish a connection to the PostgreSQL database
     connection = psycopg2.connect(
-        host="localhost",
+        host="postgres",
         port=5432,
         database="airflow",
         user="airflow",
@@ -23,10 +24,14 @@ def create_connection() -> tuple[psycopg2.extensions.connection, psycopg2.extens
 
 def create_articles_table() -> None:
     connection, cursor = create_connection()
+    
+    create_schema_query = f"CREATE SCHEMA IF NOT EXISTS {SCHEMA_NAME}"
+    cursor.execute(create_schema_query)
+    connection.commit()
 
     # Execute SQL queries to create a table
     create_table_query = f"""
-        CREATE TABLE IF NOT EXISTS "{TABLE_NAME}" (
+        CREATE TABLE IF NOT EXISTS {SCHEMA_NAME}.{TABLE_NAME} (
             id SERIAL PRIMARY KEY,
             unique_id TEXT,
             title TEXT,
@@ -39,7 +44,6 @@ def create_articles_table() -> None:
     """
     cursor.execute(create_table_query)
     connection.commit()
-
     # Close the cursor and connection
     cursor.close()
     connection.close()
@@ -49,7 +53,7 @@ def delete_articles_table() -> None:
     connection, cursor = create_connection()
 
     # Execute SQL query to drop the table
-    drop_table_query = f'DROP TABLE IF EXISTS "{TABLE_NAME}"'
+    drop_table_query = f'DROP TABLE IF EXISTS {SCHEMA_NAME}.{TABLE_NAME}'
     cursor.execute(drop_table_query)
     connection.commit()
 
@@ -63,7 +67,7 @@ def add_articles(articles: list[BlogInfo]) -> None:
 
     # Execute SQL query to insert the article into the table
     insert_query = f"""
-        INSERT INTO  "{TABLE_NAME}" (unique_id, title, description, link, blog_text, published, timestamp)
+        INSERT INTO  {SCHEMA_NAME}.{TABLE_NAME} (unique_id, title, description, link, blog_text, published, timestamp)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
     for article in articles:
@@ -90,7 +94,7 @@ def load_articles() -> list[BlogInfo]:
     connection, cursor = create_connection()
 
     # Execute SQL query to fetch articles from the table
-    select_query = f'SELECT * FROM "{TABLE_NAME}"'
+    select_query = f'SELECT * FROM {SCHEMA_NAME}.{TABLE_NAME}'
     cursor.execute(select_query)
     rows = cursor.fetchall()
 
@@ -120,7 +124,7 @@ def debug_database() -> None:
 
     # Check tables
     cursor.execute(
-        "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'iths.%'"
+        f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{SCHEMA_NAME}'"
     )
     tables = cursor.fetchall()
     print("Tables:")
@@ -130,7 +134,7 @@ def debug_database() -> None:
 
     # Print column information
     cursor.execute(
-        f"SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '{TABLE_NAME}'"
+        f"SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = '{SCHEMA_NAME}' AND table_name = '{TABLE_NAME}'"
     )
     column_info = cursor.fetchall()
     print("Column Information:")
@@ -140,7 +144,7 @@ def debug_database() -> None:
         print("")
 
     # Print first rows
-    cursor.execute(f'SELECT * FROM "{TABLE_NAME}" LIMIT 3')
+    cursor.execute(f'SELECT * FROM {SCHEMA_NAME}.{TABLE_NAME} LIMIT 3')
     rows = cursor.fetchall()
     print("First Rows:")
     for row in rows:
@@ -154,4 +158,5 @@ def debug_database() -> None:
 
 if __name__ == "__main__":
     # delete_articles_table()
+    create_articles_table()
     debug_database()
