@@ -70,7 +70,7 @@ def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSu
     Om denna inte är här så tar det ganska lång tid att genomföra summeringarna.
     Då den kontaktar openai för varje artikel. Så kommentera av denna sen i skarpt läge.
     """
-    articles = articles[3:6] # Denna alltså.
+    articles = articles[:1] # Denna alltså.
 
     summaries = []
     for article in articles:

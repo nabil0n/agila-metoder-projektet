@@ -22,6 +22,7 @@ def load_metadata(blog_name: str) -> BeautifulSoup:
     metadata_path = Path("data/data_lake") / blog_name / "metadata.xml"
     with open(metadata_path) as f:
         xml_text = f.read()
+    logger.debug(f"{xml_text=}")
 
     parsed_xml = BeautifulSoup(xml_text, "xml")
     return parsed_xml
@@ -30,10 +31,15 @@ def load_metadata(blog_name: str) -> BeautifulSoup:
 def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
     articles = []
     for item in parsed_xml.find_all("item"):
-        raw_blog_text = item.find("content:encoded").text
+        logger.debug(f"Processing {item.title.text}")
+        raw_blog_text = item.find("content:encoded").text if item.find("content:encoded") else item.find("description").text
         soup = BeautifulSoup(raw_blog_text, "html.parser")
         blog_text = soup.get_text()
         title = item.title.text
+        
+        title = title.replace("\n", "")
+        logger.debug(f"{title=}")
+        
         unique_id = create_uuid_from_string(title)
         article_info = BlogInfo(
             unique_id=unique_id,
@@ -53,9 +59,13 @@ def save_articles(articles: list[BlogInfo], blog_name: str) -> None:
     save_dir = Path("data/data_warehouse", blog_name, "articles")
     save_dir.mkdir(exist_ok=True, parents=True)
     for article in articles:
-        save_path = save_dir / article.filename
-        with open(save_path, "w") as f:
-            f.write(article.to_json())
+        try:
+            save_path = save_dir / article.filename
+            with open(save_path, "w") as f:
+                f.write(article.to_json())
+        except Exception as e:
+            logger.error(f"Failed to save article: {e}")
+            continue
 
 
 def main(blog_name: str) -> None:

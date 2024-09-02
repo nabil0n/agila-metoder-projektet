@@ -8,10 +8,11 @@ from newsfeed import log_utils
 
 LINK_TO_XML_FILE = {
     "mit": "https://news.mit.edu/rss/topic/artificial-intelligence2",
-    "NYtimes": "https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html?mcubz=0", # funkar inte
-    "huff": "https://www.huffpost.com/section/front-page/feed?x=1", # funkar inte
-    "bbc": "http://feeds.bbci.co.uk/news/world/rss.xml", # funkar inte
-    "": ""
+    # "NYtimes": "https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html?mcubz=0", # funkar inte
+    # "huff": "https://www.huffpost.com/section/front-page/feed?x=1", # funkar inte
+    # "bbc": "http://feeds.bbci.co.uk/news/world/rss.xml", # funkar inte
+    # "uneu": "https://news.un.org/feed/subscribe/en/news/region/europe/feed/rss.xml",
+    "jmlr": "https://www.jmlr.org/jmlr.xml", # FUNKAR! Men bara på redan sammanfattad text
 }
 
 
