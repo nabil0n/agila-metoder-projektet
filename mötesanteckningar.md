@@ -54,3 +54,20 @@ Agila metoder ska åtgärda så att man utnyttjar tiden, får planera om.
 * Lägg in ytterligare en blogg eller tre att sammanfatta från: Isak 
 * Få DAGs att hitta newsfeed från src/newsfeed: Mikael
 * Få databasen att fungera. Den ska även fungera inifrån DAG: Kevin
+
+## Möte 3 sep
+
+### Genomgång av aktivitet sedan sist
+* Isak har fått jmlr att fungera, men bara för description
+* Även fått den att göra non technical summary (återtstår - lagra i databasen som non technical summary)
+* Kevin: Research - Både data lake och data warehouse finns i bucket. Boto3 är Amazons serviceklient.
+  - Localstack är separat, som bara bygger upp en utvecklingsmiljö. Går inte att ha understreck, måste vara bindestreck.
+
+### Gjort tillsammans
+* Merga in Kevins databashantering i main.
+
+## Uppgifter till nästa gång
+- Isak: Undersöka precommit hooks, inklusive formattering.
+- Joakim: Fixa så att datan lagras i data lake istället för lokala .json-filer.
+- Mikael fortsätter
+- Skriva dokumentation? 
