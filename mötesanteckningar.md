@@ -67,7 +67,8 @@ Agila metoder ska åtgärda så att man utnyttjar tiden, får planera om.
 * Merga in Kevins databashantering i main.
 
 ## Uppgifter till nästa gång
-- Isak: Undersöka precommit hooks, inklusive formattering.
+- Isak: Undersöka precommit hooks, inklusive formattering. Skapa github project för att fördela och hålla ordning på tasks.
 - Joakim: Fixa så att datan lagras i data lake istället för lokala .json-filer.
 - Mikael fortsätter
-- Skriva dokumentation? 
+- Skriva dokumentation?
+- Merga in Max's branch 
