@@ -3,11 +3,11 @@ from pathlib import Path
 import jsonargparse
 import requests
 from loguru import logger
-
-from newsfeed import log_utils
 import sys
 
-sys.path.insert(1, '/Ny mapp/agila-metoder-projektet/src/newsfeed')
+from ..newsfeed import log_utils
+from ..newsfeed.datatypes import BlogInfo, BlogSummary
+
 
 LINK_TO_XML_FILE = {
     "mit": "https://news.mit.edu/rss/topic/artificial-intelligence2",
