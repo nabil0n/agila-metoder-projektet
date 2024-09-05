@@ -38,9 +38,9 @@ def tesing_functions():
     # send()
     
     first_task_done = run_newsfeed()
-    second_task_done = summarize_articles()
-    third_task_done = send()
+    #second_task_done = summarize_articles()
+    #third_task_done = send()
     
-    first_task_done >> second_task_done >> third_task_done
+    first_task_done #>> second_task_done >> third_task_done
     
 tesing_functions()

@@ -4,6 +4,7 @@ COPY ./requirements.txt ./requirements.txt
 
 RUN pip install -r ./requirements.txt
 
+CMD curl http://localhost:4566
 
 # RUN pip install poetry==1.8.3
 # RUN pip install poetry-plugin-export
