@@ -65,10 +65,48 @@ Agila metoder ska åtgärda så att man utnyttjar tiden, får planera om.
 
 ### Gjort tillsammans
 * Merga in Kevins databashantering i main.
+* Merga in Max's branch 
 
 ## Uppgifter till nästa gång
 - Isak: Undersöka precommit hooks, inklusive formattering. Skapa github project för att fördela och hålla ordning på tasks.
 - Joakim: Fixa så att datan lagras i data lake istället för lokala .json-filer.
 - Mikael fortsätter
 - Skriva dokumentation?
-- Merga in Max's branch 
+- Kevin spanar också in github projects.
+
+## Möte 10 sep
+* Jocke har fixat all kommunikation med bucketen istället för lokalt. 
+
+### Slut-Tasks
+* Först (ikväll) Jocke fixar summering till discord.
+* Sedan (före lunch imorgon) Isak: Ta bort utkommenterad kod, rensa och städa
+* Sist Mikael: Generera docstrings som dokumentation. Först docstring, sedan Sphinx. 
+
+### Retro
+
+#### Stora tasks (listan över tasks ej färdig)
+* Databasen/localstack (dålig dokumentation tog tid). Valdes istället för Minio för att lära oss lite mer.
+* Airflow
+* DAGs
+
+#### Medelstora tasks
+* Skriva testfall 
+
+#### Små tasks
+* Discord bara hitta en youtuber som gjort någonting likt det vi ville göra. Biblioteket innehåller hur mycket som helst.
+
+#### Vad gick bra?
+* Dela upp det och klaffa ihop det.
+* Fasta tider när vi sågs
+* Anteckningar
+* Bra stämning
+* Kom till varandra när vi hade svårt, kunde vända oss till varandra och ingen hade pride
+
+#### Vad kan förbättras?
+* Kommunikationen. Kan ta flera dagar innan man får tumme uppp.
+  - Säg till om klar med task. Säg också till om inte blir klar med task i tid.
+  - Dailies 5-10 minuter, delar vad vi håller på med. Fast tid varje morgon tex.
+* Använda githubs backlogg.
+
+### Dokumentation
+Sphinx är ett vanligt ramverk för att göra dokumentation.  
