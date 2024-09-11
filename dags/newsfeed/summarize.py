@@ -1,8 +1,4 @@
-from pathlib import Path
-
 from dotenv import load_dotenv
-import jsonargparse
-import pydantic
 from langchain.chains.summarize import load_summarize_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.docstore.document import Document
@@ -12,6 +8,14 @@ from loguru import logger
 
 from newsfeed import log_utils
 from newsfeed.datatypes import BlogInfo, BlogSummary
+
+from S3_utils import get_s3_client
+
+s3_client = get_s3_client()
+
+S3_BUCKET = "my-local-bucket"
+LOCALSTACK_ENDPOINT = "http://localhost:4566"
+WAREHOUSE_PREFIX = "data_warehouse/"
 
 DEFAULT_PROMPT_TEMPLATE = """
 Write a concise summary of the following:
@@ -28,36 +32,41 @@ PROMPT_TEMPLATES = {
     "non_technical": NON_TECHNICAL_PROMPT_TEMPLATE,
 }
 
-
 def load_articles(blog_name: str) -> list[BlogInfo]:
+    
+    s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/articles"
     articles = []
-    save_dir = Path("data/data_warehouse", blog_name, "articles")
-    for article_file in save_dir.glob("**/*.json"):
-        with open(article_file, "r") as f:
-            json_data = f.read()
-        article = BlogInfo.model_validate_json(json_data)
-        articles.append(article)
-
+    logger.debug(f"Downloading articles for {blog_name} from Localstack S3 at {s3_key}")
+    
+    try:
+        for article in s3_client.list_objects(Bucket=S3_BUCKET, Prefix=s3_key)["Contents"]:
+            logger.debug(f"Downloading article {article['Key']}")
+            article_key = article["Key"]
+            article_obj = s3_client.get_object(Bucket=S3_BUCKET, Key=article_key)
+            article_text = article_obj["Body"].read().decode("utf-8")
+            article = BlogInfo.model_validate_json(article_text)
+            articles.append(article)
+    except Exception as e:
+        logger.error(f"Failed to download articles for {blog_name}: {str(e)}")
+        raise
+    
     return articles
-
-# TRASIG, ersatt med ovanstående
-# def load_articles(blog_name: str) -> list[BlogInfo]:
-#     articles = []
-#     save_dir = Path("data/data_warehouse", blog_name, "articles")
-#     for article_file in save_dir.glob("**/*.json"):
-#         article = pydantic.parse_file_as(BlogInfo, article_file)
-#         articles.append(article)
-
-#     return articles
 
 
 def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
-    save_dir = Path("data/data_warehouse", blog_name, "summaries")
-    save_dir.mkdir(exist_ok=True, parents=True)
+    
     for summary in summaries:
-        save_path = save_dir / summary.filename
-        with open(save_path, "w") as f:
-            f.write(summary.to_json())
+        s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/summaries/{summary.filename}"
+        try:
+            s3_client.put_object(
+                            Bucket=S3_BUCKET,
+                            Key=s3_key,
+                            Body=summary.to_json().encode("utf-8")
+                        )
+            logger.info(f"Saved summary {summary.filename} to S3 at {s3_key}")
+        except Exception as e:
+            logger.error(f"Failed to save summary {summary.filename} to S3 at {s3_key}: {str(e)}")
+            continue
 
 
 def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSummary]:
@@ -95,16 +104,5 @@ def main(blog_name: str, summary_type: str = "default") -> None:
     articles = load_articles(blog_name)
     summaries = create_summaries(articles, summary_type)
     save_summaries(summaries, blog_name)
-
-
-def parse_args() -> jsonargparse.Namespace:
-    parser = jsonargparse.ArgumentParser()
-    parser.add_function_arguments(main)
-    return parser.parse_args()
-
-
-if __name__ == "__main__":
-    # dotenv.load_dotenv("../cfg/dev.env")
-    args = parse_args()
     log_utils.configure_logger(log_level="DEBUG")
-    main(**args)
+

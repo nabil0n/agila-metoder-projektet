@@ -1,16 +1,21 @@
 import uuid
 from datetime import datetime
-from pathlib import Path
 
-import jsonargparse
 import pandas as pd
-import json
-import pydantic
 from bs4 import BeautifulSoup
 from loguru import logger
 
 from newsfeed import log_utils
 from newsfeed.datatypes import BlogInfo
+
+from S3_utils import get_s3_client
+
+s3_client = get_s3_client()
+
+S3_BUCKET = "my-local-bucket"
+S3_PREFIX = "data_lake/"
+LOCALSTACK_ENDPOINT = "http://localhost:4566"
+WAREHOUSE_PREFIX = "data_warehouse/"
 
 
 def create_uuid_from_string(val: str) -> str:
@@ -18,14 +23,18 @@ def create_uuid_from_string(val: str) -> str:
     return str(uuid.uuid5(uuid.NAMESPACE_DNS, val))
 
 
-def load_metadata(blog_name: str) -> BeautifulSoup:
-    metadata_path = Path("data/data_lake") / blog_name / "metadata.xml"
-    with open(metadata_path) as f:
-        xml_text = f.read()
-    logger.debug(f"{xml_text=}")
-
-    parsed_xml = BeautifulSoup(xml_text, "xml")
-    return parsed_xml
+def load_metadata_info_to_s3(blog_name: str) -> BeautifulSoup:
+    s3_key = f"{S3_PREFIX}{blog_name}/metadata.xml"
+    
+    try:
+        xml_text = s3_client.get_object(Bucket=S3_BUCKET, Key=s3_key)['Body']
+        logger.info(f"Downloaded metadata for {blog_name} from Localstack S3: {s3_key}")
+        parsed_xml = BeautifulSoup(xml_text, "xml")
+        return parsed_xml
+    
+    except Exception as e:
+        logger.error(f"Failed to download metadata for {blog_name}: {str(e)}")
+        raise
 
 
 def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
@@ -54,35 +63,26 @@ def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
 
     return articles
 
-
 def save_articles(articles: list[BlogInfo], blog_name: str) -> None:
-    save_dir = Path("data/data_warehouse", blog_name, "articles")
-    save_dir.mkdir(exist_ok=True, parents=True)
+    
     for article in articles:
+        s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/articles/{article.filename}"
         try:
-            save_path = save_dir / article.filename
-            with open(save_path, "w") as f:
-                f.write(article.to_json())
+            s3_client.put_object(
+                            Bucket=S3_BUCKET,
+                            Key=s3_key,
+                            Body=article.to_json().encode("utf-8")
+                        )
+            logger.info(f"Saved article {article.filename} to S3 at {s3_key}")
         except Exception as e:
-            logger.error(f"Failed to save article: {e}")
+            logger.error(f"Failed to save article {article.filename} to S3 at {s3_key}: {str(e)}")
             continue
 
 
 def main(blog_name: str) -> None:
     logger.info(f"Processing {blog_name}")
-    parsed_xml = load_metadata(blog_name)
+    parsed_xml = load_metadata_info_to_s3(blog_name)
     articles = extract_articles_from_xml(parsed_xml)
     save_articles(articles, blog_name)
     logger.info(f"Done processing {blog_name}")
-
-
-def parse_args() -> jsonargparse.Namespace:
-    parser = jsonargparse.ArgumentParser()
-    parser.add_function_arguments(main)
-    return parser.parse_args()
-
-
-if __name__ == "__main__":
-    args = parse_args()
     log_utils.configure_logger(log_level="DEBUG")
-    main(**args)

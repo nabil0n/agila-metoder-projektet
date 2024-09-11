@@ -1,7 +1,3 @@
-from pathlib import Path
-
-import jsonargparse
-import pydantic
 from discord import SyncWebhook
 from loguru import logger
 from dotenv import load_dotenv
@@ -10,33 +6,33 @@ import os
 from newsfeed import log_utils
 from newsfeed.datatypes import BlogSummary
 
+from S3_utils import get_s3_client
+
+s3_client = get_s3_client()
+
+S3_BUCKET = "my-local-bucket"
+LOCALSTACK_ENDPOINT = "http://localhost:4566"
+WAREHOUSE_PREFIX = "data_warehouse/"
 
 def load_summaries(blog_name: str) -> list[BlogSummary]:
-    logger.debug(f"Processing {blog_name}")
-
+    s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/summaries"
+    
+    logger.debug(f"Downloading summaries for {blog_name} from Localstack S3 at {s3_key}")
+    
     summaries = []
-    save_dir = Path("data/data_warehouse", blog_name, "summaries")
-    for summary_file in save_dir.glob("**/*.json"):
-        with open(summary_file, "r") as f:
-            json_data = f.read()
-        summary = BlogSummary.model_validate_json(json_data)
-        # logger.debug(f"Added summary: {summary}")
-        summaries.append(summary)
-    logger.debug(f"Summaries: {summaries}")
+    try:
+        for summary in s3_client.list_objects(Bucket=S3_BUCKET, Prefix=s3_key)["Contents"]:
+            logger.debug(f"Downloading summary {summary['Key']}")
+            summary_data = s3_client.get_object(Bucket=S3_BUCKET, Key=summary["Key"])["Body"]
+            summary_text = summary_data.read().decode("utf-8")
+            summary = BlogSummary.model_validate_json(summary_text)
+            summaries.append(summary)
+    except Exception as e:
+        logger.error(f"Failed to download summaries for {blog_name}: {str(e)}")
+        raise
+    
     return summaries
 
-# TRASIG, ersatt med ovanstående
-# def load_summaries(blog_name: str) -> list[BlogSummary]:
-#     logger.debug(f"Processing {blog_name}")
-
-#     summaries = []
-#     save_dir = Path("data/datasets", blog_name, "summaries")
-#     for summary_file in save_dir.glob("**/*.json"):
-#         summary = pydantic.parse_file_as(BlogSummary, summary_file)
-#         # logger.debug(summary)
-#         summaries.append(summary)
-
-#     return summaries
 
 def send_to_discord(summary: BlogSummary) -> None:
     load_dotenv()
@@ -47,7 +43,7 @@ def send_to_discord(summary: BlogSummary) -> None:
         logger.error("Could not load webhook URL")
         return
 
-    group_name = "isak-TEST"
+    group_name = "Grupp2"
     message = f"**Group name: {group_name}**\n**{summary.title}**\n```{summary.text}```"
     
     #logger.debug(f"Sending summary to Discord: {summary.title} _step2_")
@@ -70,14 +66,4 @@ def main(blog_name: str) -> None:
         send_to_discord(summary)
         #logger.debug(f"Sent summary to Discord: {summary.title} _step4_")
 
-
-def parse_args() -> jsonargparse.Namespace:
-    parser = jsonargparse.ArgumentParser()
-    parser.add_function_arguments(main)
-    return parser.parse_args()
-
-
-if __name__ == "__main__":
-    args = parse_args()
     log_utils.configure_logger(log_level="DEBUG")
-    main(**args)
