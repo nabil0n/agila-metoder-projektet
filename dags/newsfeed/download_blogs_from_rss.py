@@ -43,5 +43,6 @@ def main(blog_name: str) -> None:
     logger.info(f"Processing {blog_name}")
     xml_text = get_metadata_info(blog_name)
     save_metadata_info_to_s3(xml_text, blog_name)
+    save_metadata_info_to_s3(xml_text, blog_name)
     logger.info(f"Done processing {blog_name}")
     log_utils.configure_logger(log_level="DEBUG")

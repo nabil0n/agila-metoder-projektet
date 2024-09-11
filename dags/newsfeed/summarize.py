@@ -50,7 +50,7 @@ def load_articles(blog_name: str) -> list[BlogInfo]:
         logger.error(f"Failed to download articles for {blog_name}: {str(e)}")
         raise
 
-    return articles
+#     return articles
 
 
 def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:

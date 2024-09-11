@@ -20,6 +20,7 @@ def load_summaries(blog_name: str) -> list[BlogSummary]:
 
     logger.debug(f"Downloading summaries for {blog_name} from Localstack S3 at {s3_key}")
 
+    s3_client = get_s3_client()
     summaries = []
     try:
         for summary in s3_client.list_objects(Bucket=S3_BUCKET, Prefix=s3_key)["Contents"]:

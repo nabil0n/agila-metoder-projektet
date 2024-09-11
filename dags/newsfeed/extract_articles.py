@@ -66,7 +66,6 @@ def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
 
     return articles
 
-
 def save_articles(articles: list[BlogInfo], blog_name: str) -> None:
 
     for article in articles:
