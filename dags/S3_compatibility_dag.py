@@ -28,6 +28,15 @@ default_args = {
     default_args={"owner": "Grupp2", "retries": 0},
 )
 def s3_bucket_init():
+    """
+    Initializes the S3 bucket and performs the following tasks:
+    - Creates a local bucket
+    - Uploads blog text to S3
+    - Initializes the database
+    - Updates the database with S3 URLs
+    Returns:
+    - The current timestamp after completing all tasks
+    """
 
     @task()
     def create_bucket():

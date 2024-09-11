@@ -33,6 +33,15 @@ PROMPT_TEMPLATES = {
 
 
 def load_articles(blog_name: str) -> list[BlogInfo]:
+    """
+    Load articles for a given blog name.
+    Args:
+        blog_name (str): The name of the blog.
+    Returns:
+        list[BlogInfo]: A list of BlogInfo objects representing the articles.
+    Raises:
+        Exception: If there is an error downloading the articles.
+    """
 
     s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/articles"
     articles = []
@@ -50,10 +59,18 @@ def load_articles(blog_name: str) -> list[BlogInfo]:
         logger.error(f"Failed to download articles for {blog_name}: {str(e)}")
         raise
 
-#     return articles
+    return articles
 
 
 def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
+    """
+    Save the given list of blog summaries to an S3 bucket.
+    Parameters:
+    - summaries (list[BlogSummary]): A list of BlogSummary objects representing the summaries to be saved.
+    - blog_name (str): The name of the blog.
+    Returns:
+    None
+    """
 
     for summary in summaries:
         s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/summaries/{summary.filename}"
@@ -68,6 +85,14 @@ def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
 
 
 def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSummary]:
+    """
+    Creates summaries for a list of articles.
+    Args:
+        articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be summarized.
+        summary_type (str): The type of summary to be generated.
+    Returns:
+        list[BlogSummary]: A list of BlogSummary objects representing the generated summaries.
+    """
     load_dotenv()
     model_name = "gpt-3.5-turbo"
     llm = ChatOpenAI(temperature=0, model_name=model_name)

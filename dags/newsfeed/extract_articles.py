@@ -18,11 +18,33 @@ WAREHOUSE_PREFIX = "data_warehouse/"
 
 
 def create_uuid_from_string(val: str) -> str:
+    """
+    Generates a UUID (Universally Unique Identifier) from a given string.
+
+    Args:
+        val (str): The string value to generate the UUID from.
+
+    Returns:
+        str: The generated UUID as a string.
+
+    Raises:
+        AssertionError: If the input value is not a string.
+
+    """
     assert isinstance(val, str)
     return str(uuid.uuid5(uuid.NAMESPACE_DNS, val))
 
 
 def load_metadata_info_to_s3(blog_name: str) -> BeautifulSoup:
+    """
+    Loads metadata information for a given blog name from S3.
+    Args:
+        blog_name (str): The name of the blog.
+    Returns:
+        BeautifulSoup: The parsed XML metadata.
+    Raises:
+        Exception: If failed to download metadata.
+    """
     s3_key = f"{S3_PREFIX}{blog_name}/metadata.xml"
 
     try:
@@ -37,6 +59,13 @@ def load_metadata_info_to_s3(blog_name: str) -> BeautifulSoup:
 
 
 def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
+    """
+    Extracts articles from parsed XML and returns a list of BlogInfo objects.
+    Args:
+        parsed_xml (BeautifulSoup): The parsed XML object.
+    Returns:
+        list[BlogInfo]: A list of BlogInfo objects representing the extracted articles.
+    """
     articles = []
     for item in parsed_xml.find_all("item"):
         logger.debug(f"Processing {item.title.text}")
@@ -67,6 +96,14 @@ def extract_articles_from_xml(parsed_xml: BeautifulSoup) -> list[BlogInfo]:
     return articles
 
 def save_articles(articles: list[BlogInfo], blog_name: str) -> None:
+    """
+    Save a list of articles to an S3 bucket.
+    Args:
+        articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be saved.
+        blog_name (str): The name of the blog.
+    Returns:
+        None
+    """
 
     for article in articles:
         s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/articles/{article.filename}"

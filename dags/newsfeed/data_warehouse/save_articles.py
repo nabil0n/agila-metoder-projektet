@@ -15,6 +15,15 @@ def main(blog_name: str) -> None:
 
 
 def save_articles_data_warehouse(articles: list[BlogInfo]) -> None:
+    """
+    Save articles data to the data warehouse.
+
+    Args:
+        articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be saved.
+
+    Returns:
+        None
+    """
     database_utils.delete_articles_table()
     database_utils.create_articles_table()
     database_utils.add_articles(articles)

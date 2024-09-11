@@ -19,6 +19,19 @@ LOCALSTACK_ENDPOINT = "http://localhost:4566"
 
 
 def get_metadata_info(blog_name: str) -> str:
+    """
+    Retrieves the metadata information of a blog.
+
+    Args:
+        blog_name (str): The name of the blog.
+
+    Returns:
+        str: The XML text containing the metadata information of the blog.
+
+    Raises:
+        AssertionError: If the specified blog name is not supported.
+
+    """
     assert (
         blog_name in LINK_TO_XML_FILE
     ), f"{blog_name=} not supported. Supported blogs: {list(LINK_TO_XML_FILE)}"
@@ -29,6 +42,14 @@ def get_metadata_info(blog_name: str) -> str:
 
 
 def save_metadata_info_to_s3(xml_text: str, blog_name: str) -> None:
+    """
+    Saves the metadata information to S3.
+    Args:
+        xml_text (str): The XML text containing the metadata information.
+        blog_name (str): The name of the blog.
+    Returns:
+        None
+    """
     s3_key = f"{S3_PREFIX}{blog_name}/metadata.xml"
 
     try:

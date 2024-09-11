@@ -12,6 +12,11 @@ LOCALSTACK_ENDPOINT = "http://localhost:4566"
 
 
 def delete_files() -> None:
+    """
+    Deletes files from the specified S3 bucket and prefixes.
+    Raises:
+        Exception: If there is an error while deleting the files.
+    """
     try:
         lake_response = s3_client.list_objects(Bucket=S3_BUCKET, Prefix=S3_PREFIX)
         wh_response = s3_client.list_objects(Bucket=S3_BUCKET, Prefix=WAREHOUSE_PREFIX)

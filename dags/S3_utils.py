@@ -108,6 +108,15 @@ default_args = {
     doc_md=__doc__,
 )
 def s3_bucket_init():
+    """
+    Initializes the S3 bucket by performing the following tasks:
+    1. Creates a local bucket.
+    2. Uploads blog text to the S3 bucket.
+    3. Initializes the database.
+    4. Updates the database with S3 URLs.
+    Returns:
+    None
+    """
 
     @task()
     def create_bucket():

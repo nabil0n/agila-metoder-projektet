@@ -16,6 +16,15 @@ WAREHOUSE_PREFIX = "data_warehouse/"
 
 
 def load_summaries(blog_name: str) -> list[BlogSummary]:
+    """
+    Downloads and loads the summaries for a given blog name from Localstack S3.
+    Args:
+        blog_name (str): The name of the blog.
+    Returns:
+        list[BlogSummary]: A list of loaded BlogSummary objects.
+    Raises:
+        Exception: If there is an error downloading the summaries.
+    """
     s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/summaries"
 
     logger.debug(f"Downloading summaries for {blog_name} from Localstack S3 at {s3_key}")
@@ -37,6 +46,13 @@ def load_summaries(blog_name: str) -> list[BlogSummary]:
 
 
 def send_to_discord(summary: BlogSummary) -> None:
+    """
+    Sends a blog summary to Discord.
+    Args:
+        summary (BlogSummary): The blog summary to send.
+    Returns:
+        None
+    """
     load_dotenv()
     # logger.debug(f"Sending summary to Discord: {summary.title} _step1_")
     discord_webhook_url = os.environ.get("DISCORD_WEBHOOK_URL")

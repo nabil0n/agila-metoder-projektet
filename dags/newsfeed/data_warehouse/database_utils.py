@@ -8,6 +8,13 @@ TABLE_NAME = "articles"
 
 
 def create_connection() -> tuple[psycopg2.extensions.connection, psycopg2.extensions.cursor]:
+    """
+    Creates a connection to the PostgreSQL database and returns a tuple containing the connection and cursor objects.
+    Returns:
+        tuple: A tuple containing the connection and cursor objects.
+    """
+    # Code implementation goes here
+    pass
     # Establish a connection to the PostgreSQL database
     connection = psycopg2.connect(
         host="postgres",
@@ -23,6 +30,21 @@ def create_connection() -> tuple[psycopg2.extensions.connection, psycopg2.extens
 
 
 def create_articles_table() -> None:
+    """
+    Creates the articles table in the database.
+    This function executes SQL queries to create a table named {SCHEMA_NAME}.{TABLE_NAME} in the database.
+    The table has the following columns:
+    - id: SERIAL PRIMARY KEY
+    - unique_id: TEXT
+    - title: TEXT
+    - description: TEXT
+    - link: TEXT
+    - blog_text: TEXT
+    - published: DATE
+    - timestamp: TIMESTAMP
+    Returns:
+    None
+    """
     connection, cursor = create_connection()
     
     create_schema_query = f"CREATE SCHEMA IF NOT EXISTS {SCHEMA_NAME}"
@@ -50,6 +72,17 @@ def create_articles_table() -> None:
 
 
 def delete_articles_table() -> None:
+    """
+    Deletes the articles table from the database.
+    This function executes an SQL query to drop the articles table from the database.
+    It first creates a connection and cursor using the create_connection() function.
+    Then it executes the SQL query to drop the table if it exists.
+    Finally, it commits the changes, closes the cursor and connection.
+    Parameters:
+    None
+    Returns:
+    None
+    """
     connection, cursor = create_connection()
 
     # Execute SQL query to drop the table
@@ -63,6 +96,13 @@ def delete_articles_table() -> None:
 
 
 def add_articles(articles: list[BlogInfo]) -> None:
+    """
+    Add articles to the database.
+    Args:
+        articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be added.
+    Returns:
+        None
+    """
     connection, cursor = create_connection()
 
     # Execute SQL query to insert the article into the table
@@ -91,6 +131,11 @@ def add_articles(articles: list[BlogInfo]) -> None:
 
 
 def load_articles() -> list[BlogInfo]:
+    """
+    Load articles from the database.
+    Returns:
+        list[BlogInfo]: A list of BlogInfo instances representing the articles.
+    """
     connection, cursor = create_connection()
 
     # Execute SQL query to fetch articles from the table
@@ -120,6 +165,11 @@ def load_articles() -> list[BlogInfo]:
 
 
 def debug_database() -> None:
+    """
+    Debugs the database by printing information about tables, column names, data types, and first rows.
+    Returns:
+        None
+    """
     connection, cursor = create_connection()
 
     # Check tables

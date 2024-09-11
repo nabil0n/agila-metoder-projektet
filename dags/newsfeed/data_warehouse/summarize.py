@@ -14,6 +14,12 @@ def main(blog_name: str) -> None:
 
 
 def parse_args() -> jsonargparse.Namespace:
+    """
+    Parse command line arguments and return a Namespace object.
+
+    Returns:
+        jsonargparse.Namespace: A Namespace object containing the parsed arguments.
+    """
     parser = jsonargparse.ArgumentParser()
     parser.add_function_arguments(main)
     return parser.parse_args()

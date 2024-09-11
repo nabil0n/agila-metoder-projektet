@@ -23,6 +23,21 @@ blog_name = "mit"
     default_args={"owner": "Grupp2", "retries": 0},
 )
 def tesing_functions():
+    """
+    This function defines a DAG (Directed Acyclic Graph) for a pipeline process. It consists of several tasks that are executed sequentially.
+    Tasks:
+    - run_newsfeed: Downloads blogs from an RSS feed and extracts articles.
+    - summarize_articles: Summarizes the extracted articles.
+    - send_webhook: Sends the summarized articles to Discord.
+    - clear_bucket: Clears a bucket.
+    Execution Flow:
+    1. run_newsfeed task is executed.
+    2. summarize_articles task is executed.
+    3. send_webhook task is executed.
+    4. clear_bucket task is executed.
+    Returns:
+    - The current timestamp when each task is completed.
+    """
 
     @task()
     def run_newsfeed():
@@ -51,6 +66,5 @@ def tesing_functions():
     fourth = clear_bucket()
 
     first >> second >> third >> fourth
-
 
 tesing_functions()
