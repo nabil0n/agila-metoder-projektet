@@ -5,11 +5,10 @@ from langchain.docstore.document import Document
 from langchain.prompts import PromptTemplate
 from langchain.text_splitter import CharacterTextSplitter
 from loguru import logger
+from newsfeed.datatypes import BlogInfo, BlogSummary
+from S3_utils import get_s3_client
 
 from newsfeed import log_utils
-from newsfeed.datatypes import BlogInfo, BlogSummary
-
-from S3_utils import get_s3_client
 
 s3_client = get_s3_client()
 
@@ -32,12 +31,13 @@ PROMPT_TEMPLATES = {
     "non_technical": NON_TECHNICAL_PROMPT_TEMPLATE,
 }
 
+
 def load_articles(blog_name: str) -> list[BlogInfo]:
-    
+
     s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/articles"
     articles = []
     logger.debug(f"Downloading articles for {blog_name} from Localstack S3 at {s3_key}")
-    
+
     try:
         for article in s3_client.list_objects(Bucket=S3_BUCKET, Prefix=s3_key)["Contents"]:
             logger.debug(f"Downloading article {article['Key']}")
@@ -49,20 +49,18 @@ def load_articles(blog_name: str) -> list[BlogInfo]:
     except Exception as e:
         logger.error(f"Failed to download articles for {blog_name}: {str(e)}")
         raise
-    
+
     return articles
 
 
 def save_summaries(summaries: list[BlogSummary], blog_name: str) -> None:
-    
+
     for summary in summaries:
         s3_key = f"{WAREHOUSE_PREFIX}{blog_name}/summaries/{summary.filename}"
         try:
             s3_client.put_object(
-                            Bucket=S3_BUCKET,
-                            Key=s3_key,
-                            Body=summary.to_json().encode("utf-8")
-                        )
+                Bucket=S3_BUCKET, Key=s3_key, Body=summary.to_json().encode("utf-8")
+            )
             logger.info(f"Saved summary {summary.filename} to S3 at {s3_key}")
         except Exception as e:
             logger.error(f"Failed to save summary {summary.filename} to S3 at {s3_key}: {str(e)}")
@@ -79,7 +77,7 @@ def create_summaries(articles: list[BlogInfo], summary_type: str) -> list[BlogSu
     Om denna inte är här så tar det ganska lång tid att genomföra summeringarna.
     Då den kontaktar openai för varje artikel. Så kommentera av denna sen i skarpt läge.
     """
-    articles = articles[:1] # Denna alltså.
+    articles = articles[:1]  # Denna alltså.
 
     summaries = []
     for article in articles:
@@ -105,4 +103,3 @@ def main(blog_name: str, summary_type: str = "default") -> None:
     summaries = create_summaries(articles, summary_type)
     save_summaries(summaries, blog_name)
     log_utils.configure_logger(log_level="DEBUG")
-

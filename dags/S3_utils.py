@@ -1,16 +1,21 @@
-from airflow.decorators import dag, task
-from airflow.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
-from airflow.models import Variable
-from newsfeed.data_warehouse.database_utils import create_connection, load_articles, create_articles_table
-import boto3
-from loguru import logger
 from datetime import timedelta
 
+import boto3
+from airflow.decorators import dag, task
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+from airflow.utils.dates import days_ago
+from loguru import logger
+from newsfeed.data_warehouse.database_utils import (
+    create_articles_table,
+    create_connection,
+    load_articles,
+)
 
 S3_BUCKET = "my-local-bucket"
 S3_PREFIX = "data-lake/"
 LOCALSTACK_ENDPOINT = "http://localstack:4566"
+
 
 def get_s3_client():
     return boto3.client(
@@ -21,11 +26,14 @@ def get_s3_client():
         region_name="us-east-1",
     )
 
+
 s3_client = get_s3_client()
+
 
 def initialize_database(**kwargs):
     create_articles_table()
     logger.info("Database initialized")
+
 
 def create_local_bucket(**kwargs):
     try:
@@ -43,24 +51,27 @@ def upload_blog_text(**kwargs):
 
     s3_urls = []
     for article in articles:
-            if article.blog_text and not article.s3_url:
-                try:
-                    s3_key = f"{S3_PREFIX}{article.unique_id}.txt"
-                    s3_client.put_object(Bucket=S3_BUCKET, Key=s3_key, Body=article.blog_text.encode('utf-8'))
-                    s3_url = f"{LOCALSTACK_ENDPOINT}/{S3_BUCKET}/{s3_key}"
-                    s3_urls.append((article.unique_id, s3_url))
-                    logger.info(f"Uploaded article {article.unique_id} to LocalStack S3")
-                except Exception as e:
-                    logger.error(f"Error uploading article {article.unique_id}: {str(e)}")
+        if article.blog_text and not article.s3_url:
+            try:
+                s3_key = f"{S3_PREFIX}{article.unique_id}.txt"
+                s3_client.put_object(
+                    Bucket=S3_BUCKET, Key=s3_key, Body=article.blog_text.encode("utf-8")
+                )
+                s3_url = f"{LOCALSTACK_ENDPOINT}/{S3_BUCKET}/{s3_key}"
+                s3_urls.append((article.unique_id, s3_url))
+                logger.info(f"Uploaded article {article.unique_id} to LocalStack S3")
+            except Exception as e:
+                logger.error(f"Error uploading article {article.unique_id}: {str(e)}")
 
     return s3_urls
+
 
 def update_database_with_s3_urls(**kwargs):
     connection, cursor = create_connection()
     try:
-        ti = kwargs['ti']
-        s3_urls = ti.xcom_pull(task_ids='upload_to_s3')
-        
+        ti = kwargs["ti"]
+        s3_urls = ti.xcom_pull(task_ids="upload_to_s3")
+
         if not s3_urls:
             logger.info("No S3 URLs to update")
             return
@@ -80,44 +91,46 @@ def update_database_with_s3_urls(**kwargs):
         cursor.close()
         connection.close()
 
+
 default_args = {
-    'start_date': days_ago(1),
-    'retries': 3,
-    'retry_delay': timedelta(minutes=5),
-    'owner': 'Grupp2',
+    "start_date": days_ago(1),
+    "retries": 3,
+    "retry_delay": timedelta(minutes=5),
+    "owner": "Grupp2",
 }
 
+
 @dag(
-    dag_id='s3_compatibility',
+    dag_id="s3_compatibility",
     default_args=default_args,
     schedule="@once",
     catchup=False,
     doc_md=__doc__,
 )
-
 def s3_bucket_init():
-    
+
     @task()
     def create_bucket():
         create_local_bucket()
-    
+
     @task()
     def upload_to_s3():
         upload_blog_text()
-    
+
     @task()
     def initialize_db():
         initialize_database()
-    
+
     @task()
     def update_database_dag():
         update_database_with_s3_urls()
-    
+
     first = create_bucket()
     second = upload_to_s3()
     third = initialize_db()
     fourth = update_database_dag()
-    
+
     first >> second >> third >> fourth
+
 
 s3_bucket_init()

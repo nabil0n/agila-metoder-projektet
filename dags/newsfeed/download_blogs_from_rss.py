@@ -1,21 +1,22 @@
 import requests
 from loguru import logger
+from S3_utils import get_s3_client
 
 from newsfeed import log_utils
-from S3_utils import get_s3_client
 
 s3_client = get_s3_client()
 
 LINK_TO_XML_FILE = {
     "mit": "https://news.mit.edu/rss/topic/artificial-intelligence2",
-    "bbc": "http://feeds.bbci.co.uk/news/world/rss.xml", # FUNKAR! Men bara på redan sammanfattad text
-    "uneu": "https://news.un.org/feed/subscribe/en/news/region/europe/feed/rss.xml", # FUNKAR! Men bara på redan sammanfattad text
-    "jmlr": "https://www.jmlr.org/jmlr.xml", # FUNKAR! Men bara på redan sammanfattad text
+    "bbc": "http://feeds.bbci.co.uk/news/world/rss.xml",  # FUNKAR! Men bara på redan sammanfattad text
+    "uneu": "https://news.un.org/feed/subscribe/en/news/region/europe/feed/rss.xml",  # FUNKAR! Men bara på redan sammanfattad text
+    "jmlr": "https://www.jmlr.org/jmlr.xml",  # FUNKAR! Men bara på redan sammanfattad text
 }
 
 S3_BUCKET = "my-local-bucket"
 S3_PREFIX = "data_lake/"
 LOCALSTACK_ENDPOINT = "http://localhost:4566"
+
 
 def get_metadata_info(blog_name: str) -> str:
     assert (
@@ -26,9 +27,10 @@ def get_metadata_info(blog_name: str) -> str:
     xml_text = response.text
     return xml_text
 
+
 def save_metadata_info_to_s3(xml_text: str, blog_name: str) -> None:
     s3_key = f"{S3_PREFIX}{blog_name}/metadata.xml"
-    
+
     try:
         s3_client.put_object(Bucket=S3_BUCKET, Key=s3_key, Body=xml_text.encode("utf-8"))
         logger.info(f"Updloaded metadata for {blog_name} to Localstack S3: {s3_key}")
