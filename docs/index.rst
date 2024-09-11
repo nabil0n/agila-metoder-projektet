@@ -15,6 +15,7 @@ Agila metoder - Grupp 2 documentation
    :maxdepth: 2
    :caption: Contents:
 
+   docker-compose.rst
    modules.rst
    newsfeed.data_warehouse.rst
    newsfeed.rst

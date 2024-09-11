@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Docker Compose Configuration for Airflow &#8212; Agila metoder - Grupp 2 2024-09-11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=20e377a9"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dags" href="modules.html" />
+    <link rel="prev" title="Agila metoder - Grupp 2 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="docker-compose-configuration-for-airflow">
+<h1>Docker Compose Configuration for Airflow<a class="headerlink" href="#docker-compose-configuration-for-airflow" title="Link to this heading">¶</a></h1>
+<p>This <cite>docker-compose.yaml</cite> file sets up a basic Airflow cluster configuration using <cite>CeleryExecutor</cite>, <cite>Redis</cite>, and <cite>PostgreSQL</cite> for local development purposes. This setup is <strong>not</strong> recommended for production use.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This configuration is for local development only. Do not use it in a production environment.</p>
+</div>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">¶</a></h2>
+<p>This Docker Compose configuration allows for basic customization through environment variables, or by using an <cite>.env</cite> file. The following variables are supported:</p>
+<ul class="simple">
+<li><p><strong>AIRFLOW_IMAGE_NAME</strong>: Docker image name used to run Airflow. Default: <cite>apache/airflow:2.10.0</cite></p></li>
+<li><p><strong>AIRFLOW_UID</strong>: User ID in Airflow containers. Default: <cite>50000</cite></p></li>
+<li><p><strong>AIRFLOW_PROJ_DIR</strong>: Base path to which all the files will be mounted. Default: <cite>.</cite></p></li>
+<li><p><strong>_AIRFLOW_WWW_USER_USERNAME</strong>: Username for the administrator account. Default: <cite>airflow</cite></p></li>
+<li><p><strong>_AIRFLOW_WWW_USER_PASSWORD</strong>: Password for the administrator account. Default: <cite>airflow</cite></p></li>
+<li><p><strong>_PIP_ADDITIONAL_REQUIREMENTS</strong>: Additional Python packages to install at container startup.
+This is intended only for quick checks, and it’s recommended to extend the official Airflow image for custom dependencies.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more robust configurations, it’s better to extend the official Docker image as described in
+the Airflow documentation:
+<a class="reference external" href="https://airflow.apache.org/docs/docker-stack/build.html">https://airflow.apache.org/docs/docker-stack/build.html</a></p>
+</div>
+</section>
+<section id="services-overview">
+<h2>Services Overview<a class="headerlink" href="#services-overview" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>PostgreSQL</strong>: This service uses the <cite>postgres:13</cite> Docker image and serves as the backend database for Airflow.</p></li>
+<li><p><strong>Redis</strong>: The <cite>redis:7.2-bookworm</cite> image is used as the broker for <cite>CeleryExecutor</cite>.</p></li>
+<li><p><strong>Airflow Webserver</strong>: The Airflow web interface is exposed on port <cite>8080</cite>.</p></li>
+<li><p><strong>Airflow Scheduler</strong>: Handles task scheduling and runs health checks on port <cite>8974</cite>.</p></li>
+<li><p><strong>Airflow Worker</strong>: The worker node for running tasks with the <cite>CeleryExecutor</cite>.</p></li>
+<li><p><strong>Airflow Triggerer</strong>: The triggerer service is used to handle deferred tasks.</p></li>
+<li><p><strong>Localstack</strong>: Used for mocking AWS services such as S3. Exposed on ports <cite>4566</cite> and <cite>4571</cite>.</p></li>
+<li><p><strong>Airflow Init</strong>: Initializes the Airflow environment, creating the necessary user accounts and databases.</p></li>
+<li><p><strong>Flower (optional)</strong>: This service provides a web-based UI for monitoring Celery jobs, exposed on port <cite>5555</cite>.</p></li>
+</ul>
+</section>
+<section id="postgresql-service">
+<h2>PostgreSQL Service<a class="headerlink" href="#postgresql-service" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Image</strong>: <cite>postgres:13</cite></p></li>
+<li><p><strong>Environment Variables</strong>:
+- <cite>POSTGRES_USER</cite>: The username for PostgreSQL (default: <cite>airflow</cite>).
+- <cite>POSTGRES_PASSWORD</cite>: The password for PostgreSQL (default: <cite>airflow</cite>).
+- <cite>POSTGRES_DB</cite>: The database name (default: <cite>airflow</cite>).</p></li>
+<li><p><strong>Volumes</strong>: Persists PostgreSQL data to the <cite>postgres-db-volume</cite> volume.</p></li>
+<li><p><strong>Health Check</strong>: Uses the <cite>pg_isready</cite> command to check database availability.</p></li>
+</ul>
+</section>
+<section id="redis-service">
+<h2>Redis Service<a class="headerlink" href="#redis-service" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Image</strong>: <cite>redis:7.2-bookworm</cite></p></li>
+<li><p><strong>Ports</strong>: Exposes port <cite>6379</cite> for Redis communication.</p></li>
+<li><p><strong>Health Check</strong>: Uses the <cite>redis-cli ping</cite> command to check if Redis is ready.</p></li>
+</ul>
+</section>
+<section id="airflow-webserver">
+<h2>Airflow Webserver<a class="headerlink" href="#airflow-webserver" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Command</strong>: <cite>webserver</cite></p></li>
+<li><p><strong>Ports</strong>: Exposes the Airflow UI on port <cite>8080</cite>.</p></li>
+<li><p><strong>Health Check</strong>: Uses a simple <cite>curl</cite> command to check the health of the webserver by pinging <cite>/health</cite>.</p></li>
+</ul>
+</section>
+<section id="airflow-scheduler">
+<h2>Airflow Scheduler<a class="headerlink" href="#airflow-scheduler" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Command</strong>: <cite>scheduler</cite></p></li>
+<li><p><strong>Health Check</strong>: Runs on port <cite>8974</cite> for health monitoring.</p></li>
+<li><p><strong>Dependencies</strong>: Depends on both Redis and PostgreSQL services to be healthy before starting.</p></li>
+</ul>
+</section>
+<section id="airflow-worker">
+<h2>Airflow Worker<a class="headerlink" href="#airflow-worker" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Command</strong>: <cite>celery worker</cite></p></li>
+<li><p><strong>Health Check</strong>: Runs a Celery ping command to verify the worker is alive and responsive.</p></li>
+<li><p><strong>Environment Variables</strong>: Includes special configuration for <cite>DUMB_INIT_SETSID</cite> to ensure proper shutdown handling.</p></li>
+</ul>
+</section>
+<section id="airflow-triggerer">
+<h2>Airflow Triggerer<a class="headerlink" href="#airflow-triggerer" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Command</strong>: <cite>triggerer</cite></p></li>
+<li><p><strong>Health Check</strong>: Uses the Airflow command <cite>airflow jobs check</cite> to verify the TriggererJob is running correctly.</p></li>
+</ul>
+</section>
+<section id="localstack">
+<h2>Localstack<a class="headerlink" href="#localstack" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Image</strong>: <cite>localstack/localstack</cite></p></li>
+<li><p><strong>Environment Variables</strong>:
+- <cite>SERVICES</cite>: Specifies which AWS services to mock (default: <cite>s3</cite>).
+- <cite>DEBUG</cite>: Enables debug mode.</p></li>
+<li><p><strong>Ports</strong>: Exposes ports <cite>4566</cite> and <cite>4571</cite> for Localstack communication.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Localstack is used to mock AWS services like S3 for testing purposes.</p>
+</div>
+</section>
+<section id="airflow-init-service">
+<h2>Airflow Init Service<a class="headerlink" href="#airflow-init-service" title="Link to this heading">¶</a></h2>
+<p>This service is responsible for initializing the Airflow environment, including:
+- Database migrations.
+- Creating the default Airflow admin user.
+- Setting permissions on directories.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to check the warnings regarding insufficient resources (memory, CPU, and disk space) that are printed during initialization.</p>
+</div>
+</section>
+<section id="volumes">
+<h2>Volumes<a class="headerlink" href="#volumes" title="Link to this heading">¶</a></h2>
+<p>The following volumes are defined in this configuration:</p>
+<ul class="simple">
+<li><p><cite>postgres-db-volume</cite>: Stores PostgreSQL database files.</p></li>
+<li><p><cite>localstack-data</cite>: Stores Localstack data.</p></li>
+<li><p>Various project directories, such as <cite>dags</cite>, <cite>logs</cite>, <cite>plugins</cite>, <cite>config</cite>, <cite>data</cite>, and <cite>src/newsfeed</cite> are mounted to specific paths in the Airflow containers.</p></li>
+</ul>
+</section>
+<section id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>PYTHONPATH Configuration</strong>: The <cite>PYTHONPATH</cite> is customized to include <cite>/mnt/package-code</cite>, which allows for dynamic loading of Python code during development.</p></li>
+<li><p><strong>Health Checks</strong>: Each major service in this configuration includes a health check, ensuring that services are ready before dependent services start.</p></li>
+<li><p><strong>Licensing</strong>: This file is licensed under the Apache License, Version 2.0. Refer to the <cite>LICENSE</cite> file for more details.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References:<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><cite>Airflow Docker Documentation</cite>: <a class="reference external" href="https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html">https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html</a></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Agila metoder - Grupp 2</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docker Compose Configuration for Airflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#services-overview">Services Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#postgresql-service">PostgreSQL Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redis-service">Redis Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow-webserver">Airflow Webserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow-scheduler">Airflow Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow-worker">Airflow Worker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow-triggerer">Airflow Triggerer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#localstack">Localstack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow-init-service">Airflow Init Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#volumes">Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-notes">Additional Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">dags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newsfeed.data_warehouse.html">newsfeed.data_warehouse package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newsfeed.html">newsfeed package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_dag.html">pipeline_dag module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_compatibility_dag.html">S3_compatibility_dag module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="S3_utils.html">S3_utils module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Agila metoder - Grupp 2 documentation</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">dags</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Grupp 2.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/docker-compose.yaml.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
