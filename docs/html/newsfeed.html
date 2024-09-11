@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>newsfeed package &#8212; Agila metoder - Grupp 2 2024-09-11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=20e377a9"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="newsfeed-package">
+<h1>newsfeed package<a class="headerlink" href="#newsfeed-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="newsfeed.data_warehouse.html">newsfeed.data_warehouse package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.data_warehouse.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.database_utils">newsfeed.data_warehouse.database_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.add_articles"><code class="docutils literal notranslate"><span class="pre">add_articles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.create_articles_table"><code class="docutils literal notranslate"><span class="pre">create_articles_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.debug_database"><code class="docutils literal notranslate"><span class="pre">debug_database()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.delete_articles_table"><code class="docutils literal notranslate"><span class="pre">delete_articles_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.database_utils.load_articles"><code class="docutils literal notranslate"><span class="pre">load_articles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.save_articles">newsfeed.data_warehouse.save_articles module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.save_articles.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.save_articles.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.save_articles.save_articles_data_warehouse"><code class="docutils literal notranslate"><span class="pre">save_articles_data_warehouse()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.summarize">newsfeed.data_warehouse.summarize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.summarize.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html#newsfeed.data_warehouse.summarize.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-newsfeed.clearbucket">
+<span id="newsfeed-clearbucket-module"></span><h2>newsfeed.clearbucket module<a class="headerlink" href="#module-newsfeed.clearbucket" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.clearbucket.delete_files">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.clearbucket.</span></span><span class="sig-name descname"><span class="pre">delete_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.clearbucket.delete_files" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes files from the specified S3 bucket and prefixes.
+Raises:</p>
+<blockquote>
+<div><p>Exception: If there is an error while deleting the files.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.clearbucket.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.clearbucket.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.clearbucket.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-newsfeed.dag_start">
+<span id="newsfeed-dag-start-module"></span><h2>newsfeed.dag_start module<a class="headerlink" href="#module-newsfeed.dag_start" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.dag_start.get_name">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.dag_start.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#newsfeed.dag_start.get_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-newsfeed.datatypes">
+<span id="newsfeed-datatypes-module"></span><h2>newsfeed.datatypes module<a class="headerlink" href="#module-newsfeed.datatypes" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">newsfeed.datatypes.</span></span><span class="sig-name descname"><span class="pre">BlogInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blog_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">published</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#newsfeed.datatypes.BlogInfo" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Represents information about a blog post.
+Attributes:</p>
+<blockquote>
+<div><p>unique_id (str): The unique identifier of the blog post.
+title (str): The title of the blog post.
+description (str): The description of the blog post.
+link (str): The link to the blog post.
+blog_text (str): The content of the blog post.
+published (date): The date when the blog post was published.
+timestamp (datetime): The timestamp of the blog post.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Methods:</dt><dd><dl class="simple">
+<dt>filename() -&gt; str:</dt><dd><p>Returns the filename for the blog post in JSON format.</p>
+</dd>
+<dt>to_json() -&gt; str:</dt><dd><p>Returns the JSON representation of the blog post.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.blog_text">
+<span class="sig-name descname"><span class="pre">blog_text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.blog_text" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.description" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.filename" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.link">
+<span class="sig-name descname"><span class="pre">link</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.link" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'blog_text':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'description':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'link':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'published':</span> <span class="pre">FieldInfo(annotation=date,</span> <span class="pre">required=True),</span> <span class="pre">'timestamp':</span> <span class="pre">FieldInfo(annotation=datetime,</span> <span class="pre">required=True),</span> <span class="pre">'title':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'unique_id':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.published">
+<span class="sig-name descname"><span class="pre">published</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">date</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.published" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.title" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.to_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogInfo.unique_id">
+<span class="sig-name descname"><span class="pre">unique_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogInfo.unique_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">newsfeed.datatypes.</span></span><span class="sig-name descname"><span class="pre">BlogSummary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#newsfeed.datatypes.BlogSummary" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Represents a summary of a blog post.
+Attributes:</p>
+<blockquote>
+<div><p>unique_id (str): The unique identifier of the blog post.
+title (str): The title of the blog post.
+text (str): The text content of the blog post.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Methods:</dt><dd><p>filename() -&gt; str: Returns the filename for the blog post in JSON format.
+to_json() -&gt; str: Converts the blog summary object to a JSON string.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.filename" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.model_computed_fields" title="Link to this definition">¶</a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'text':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'title':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True),</span> <span class="pre">'unique_id':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.model_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.text" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.title" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.to_json" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="newsfeed.datatypes.BlogSummary.unique_id">
+<span class="sig-name descname"><span class="pre">unique_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#newsfeed.datatypes.BlogSummary.unique_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.download_blogs_from_rss">
+<span id="newsfeed-download-blogs-from-rss-module"></span><h2>newsfeed.download_blogs_from_rss module<a class="headerlink" href="#module-newsfeed.download_blogs_from_rss" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.download_blogs_from_rss.get_metadata_info">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.download_blogs_from_rss.</span></span><span class="sig-name descname"><span class="pre">get_metadata_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#newsfeed.download_blogs_from_rss.get_metadata_info" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the metadata information of a blog.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>blog_name (str): The name of the blog.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The XML text containing the metadata information of the blog.</p>
+</dd>
+<dt>Raises:</dt><dd><p>AssertionError: If the specified blog name is not supported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.download_blogs_from_rss.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.download_blogs_from_rss.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.download_blogs_from_rss.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.download_blogs_from_rss.save_metadata_info_to_s3">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.download_blogs_from_rss.</span></span><span class="sig-name descname"><span class="pre">save_metadata_info_to_s3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.download_blogs_from_rss.save_metadata_info_to_s3" title="Link to this definition">¶</a></dt>
+<dd><p>Saves the metadata information to S3.
+Args:</p>
+<blockquote>
+<div><p>xml_text (str): The XML text containing the metadata information.
+blog_name (str): The name of the blog.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.extract_articles">
+<span id="newsfeed-extract-articles-module"></span><h2>newsfeed.extract_articles module<a class="headerlink" href="#module-newsfeed.extract_articles" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.extract_articles.create_uuid_from_string">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.extract_articles.</span></span><span class="sig-name descname"><span class="pre">create_uuid_from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#newsfeed.extract_articles.create_uuid_from_string" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a UUID (Universally Unique Identifier) from a given string.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>val (str): The string value to generate the UUID from.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The generated UUID as a string.</p>
+</dd>
+<dt>Raises:</dt><dd><p>AssertionError: If the input value is not a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.extract_articles.extract_articles_from_xml">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.extract_articles.</span></span><span class="sig-name descname"><span class="pre">extract_articles_from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_xml</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BeautifulSoup</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.extract_articles.extract_articles_from_xml" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts articles from parsed XML and returns a list of BlogInfo objects.
+Args:</p>
+<blockquote>
+<div><p>parsed_xml (BeautifulSoup): The parsed XML object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list[BlogInfo]: A list of BlogInfo objects representing the extracted articles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.extract_articles.load_metadata_info_to_s3">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.extract_articles.</span></span><span class="sig-name descname"><span class="pre">load_metadata_info_to_s3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BeautifulSoup</span></span></span><a class="headerlink" href="#newsfeed.extract_articles.load_metadata_info_to_s3" title="Link to this definition">¶</a></dt>
+<dd><p>Loads metadata information for a given blog name from S3.
+Args:</p>
+<blockquote>
+<div><p>blog_name (str): The name of the blog.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>BeautifulSoup: The parsed XML metadata.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If failed to download metadata.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.extract_articles.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.extract_articles.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.extract_articles.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.extract_articles.save_articles">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.extract_articles.</span></span><span class="sig-name descname"><span class="pre">save_articles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">articles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.extract_articles.save_articles" title="Link to this definition">¶</a></dt>
+<dd><p>Save a list of articles to an S3 bucket.
+Args:</p>
+<blockquote>
+<div><p>articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be saved.
+blog_name (str): The name of the blog.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.log_utils">
+<span id="newsfeed-log-utils-module"></span><h2>newsfeed.log_utils module<a class="headerlink" href="#module-newsfeed.log_utils" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.log_utils.configure_logger">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.log_utils.</span></span><span class="sig-name descname"><span class="pre">configure_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'INFO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;level&gt;[{time:YYYY-MM-DD</span> <span class="pre">HH:mm:ss}]</span> <span class="pre">[{level}]</span> <span class="pre">[{file}</span> <span class="pre">|</span> <span class="pre">{function}</span> <span class="pre">|</span> <span class="pre">line</span> <span class="pre">{line}]&lt;/&gt;</span> <span class="pre">{message}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">loguru.Logger</span></span></span><a class="headerlink" href="#newsfeed.log_utils.configure_logger" title="Link to this definition">¶</a></dt>
+<dd><p>Configures the logger with the specified log level and format.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>log_level (str, optional): The log level to set for the logger. Defaults to “INFO”.
+format (str, optional): The log format to use. Defaults to DEFAULT_FORMAT.</p>
+</dd>
+<dt>Returns:</dt><dd><p>loguru.Logger: The configured logger instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.max_send_to_discord">
+<span id="newsfeed-max-send-to-discord-module"></span><h2>newsfeed.max_send_to_discord module<a class="headerlink" href="#module-newsfeed.max_send_to_discord" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.max_send_to_discord.load_summaries">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.max_send_to_discord.</span></span><span class="sig-name descname"><span class="pre">load_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.max_send_to_discord.load_summaries" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.max_send_to_discord.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.max_send_to_discord.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.max_send_to_discord.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.max_send_to_discord.parse_args">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.max_send_to_discord.</span></span><span class="sig-name descname"><span class="pre">parse_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Namespace</span></span></span><a class="headerlink" href="#newsfeed.max_send_to_discord.parse_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.max_send_to_discord.send_to_discord">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.max_send_to_discord.</span></span><span class="sig-name descname"><span class="pre">send_to_discord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.max_send_to_discord.send_to_discord" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-newsfeed.send_to_discord">
+<span id="newsfeed-send-to-discord-module"></span><h2>newsfeed.send_to_discord module<a class="headerlink" href="#module-newsfeed.send_to_discord" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.send_to_discord.load_summaries">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.send_to_discord.</span></span><span class="sig-name descname"><span class="pre">load_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.send_to_discord.load_summaries" title="Link to this definition">¶</a></dt>
+<dd><p>Downloads and loads the summaries for a given blog name from Localstack S3.
+Args:</p>
+<blockquote>
+<div><p>blog_name (str): The name of the blog.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list[BlogSummary]: A list of loaded BlogSummary objects.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If there is an error downloading the summaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.send_to_discord.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.send_to_discord.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.send_to_discord.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.send_to_discord.send_to_discord">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.send_to_discord.</span></span><span class="sig-name descname"><span class="pre">send_to_discord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.send_to_discord.send_to_discord" title="Link to this definition">¶</a></dt>
+<dd><p>Sends a blog summary to Discord.
+Args:</p>
+<blockquote>
+<div><p>summary (BlogSummary): The blog summary to send.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.summarize">
+<span id="newsfeed-summarize-module"></span><h2>newsfeed.summarize module<a class="headerlink" href="#module-newsfeed.summarize" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.summarize.create_summaries">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.summarize.</span></span><span class="sig-name descname"><span class="pre">create_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">articles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.summarize.create_summaries" title="Link to this definition">¶</a></dt>
+<dd><p>Creates summaries for a list of articles.
+Args:</p>
+<blockquote>
+<div><p>articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be summarized.
+summary_type (str): The type of summary to be generated.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list[BlogSummary]: A list of BlogSummary objects representing the generated summaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.summarize.load_articles">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.summarize.</span></span><span class="sig-name descname"><span class="pre">load_articles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.summarize.load_articles" title="Link to this definition">¶</a></dt>
+<dd><p>Load articles for a given blog name.
+Args:</p>
+<blockquote>
+<div><p>blog_name (str): The name of the blog.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list[BlogInfo]: A list of BlogInfo objects representing the articles.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If there is an error downloading the articles.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.summarize.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.summarize.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.summarize.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.summarize.save_summaries">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.summarize.</span></span><span class="sig-name descname"><span class="pre">save_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">summaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#newsfeed.datatypes.BlogSummary" title="newsfeed.datatypes.BlogSummary"><span class="pre">BlogSummary</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.summarize.save_summaries" title="Link to this definition">¶</a></dt>
+<dd><p>Save the given list of blog summaries to an S3 bucket.
+Parameters:
+- summaries (list[BlogSummary]): A list of BlogSummary objects representing the summaries to be saved.
+- blog_name (str): The name of the blog.
+Returns:
+None</p>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-newsfeed" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Agila metoder - Grupp 2</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Grupp 2.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/newsfeed.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dags &#8212; Agila metoder - Grupp 2 2024-09-11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=20e377a9"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dags">
+<h1>dags<a class="headerlink" href="#dags" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Max_roliga_DAGtest.html">Max_roliga_DAGtest module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Max_roliga_DAGtest.html#Max_roliga_DAGtest.task_functions"><code class="docutils literal notranslate"><span class="pre">task_functions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="S3_compatibility_dag.html">S3_compatibility_dag module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="S3_compatibility_dag.html#S3_compatibility_dag.s3_bucket_init"><code class="docutils literal notranslate"><span class="pre">s3_bucket_init()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="S3_utils.html">S3_utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.create_local_bucket"><code class="docutils literal notranslate"><span class="pre">create_local_bucket()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.get_s3_client"><code class="docutils literal notranslate"><span class="pre">get_s3_client()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.initialize_database"><code class="docutils literal notranslate"><span class="pre">initialize_database()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.s3_bucket_init"><code class="docutils literal notranslate"><span class="pre">s3_bucket_init()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.update_database_with_s3_urls"><code class="docutils literal notranslate"><span class="pre">update_database_with_s3_urls()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="S3_utils.html#S3_utils.upload_blog_text"><code class="docutils literal notranslate"><span class="pre">upload_blog_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="newsfeed.html">newsfeed package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.data_warehouse.html">newsfeed.data_warehouse package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.data_warehouse.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.database_utils">newsfeed.data_warehouse.database_utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.save_articles">newsfeed.data_warehouse.save_articles module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse.summarize">newsfeed.data_warehouse.summarize module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.data_warehouse.html#module-newsfeed.data_warehouse">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.clearbucket">newsfeed.clearbucket module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.clearbucket.delete_files"><code class="docutils literal notranslate"><span class="pre">delete_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.clearbucket.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.dag_start">newsfeed.dag_start module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.dag_start.get_name"><code class="docutils literal notranslate"><span class="pre">get_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.datatypes">newsfeed.datatypes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo"><code class="docutils literal notranslate"><span class="pre">BlogInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.blog_text"><code class="docutils literal notranslate"><span class="pre">BlogInfo.blog_text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.description"><code class="docutils literal notranslate"><span class="pre">BlogInfo.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.filename"><code class="docutils literal notranslate"><span class="pre">BlogInfo.filename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.link"><code class="docutils literal notranslate"><span class="pre">BlogInfo.link</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">BlogInfo.model_computed_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.model_config"><code class="docutils literal notranslate"><span class="pre">BlogInfo.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.model_fields"><code class="docutils literal notranslate"><span class="pre">BlogInfo.model_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.published"><code class="docutils literal notranslate"><span class="pre">BlogInfo.published</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.timestamp"><code class="docutils literal notranslate"><span class="pre">BlogInfo.timestamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.title"><code class="docutils literal notranslate"><span class="pre">BlogInfo.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.to_json"><code class="docutils literal notranslate"><span class="pre">BlogInfo.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo.unique_id"><code class="docutils literal notranslate"><span class="pre">BlogInfo.unique_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary"><code class="docutils literal notranslate"><span class="pre">BlogSummary</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.filename"><code class="docutils literal notranslate"><span class="pre">BlogSummary.filename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">BlogSummary.model_computed_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.model_config"><code class="docutils literal notranslate"><span class="pre">BlogSummary.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.model_fields"><code class="docutils literal notranslate"><span class="pre">BlogSummary.model_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.text"><code class="docutils literal notranslate"><span class="pre">BlogSummary.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.title"><code class="docutils literal notranslate"><span class="pre">BlogSummary.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.to_json"><code class="docutils literal notranslate"><span class="pre">BlogSummary.to_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogSummary.unique_id"><code class="docutils literal notranslate"><span class="pre">BlogSummary.unique_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.download_blogs_from_rss">newsfeed.download_blogs_from_rss module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.download_blogs_from_rss.get_metadata_info"><code class="docutils literal notranslate"><span class="pre">get_metadata_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.download_blogs_from_rss.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.download_blogs_from_rss.save_metadata_info_to_s3"><code class="docutils literal notranslate"><span class="pre">save_metadata_info_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.extract_articles">newsfeed.extract_articles module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.extract_articles.create_uuid_from_string"><code class="docutils literal notranslate"><span class="pre">create_uuid_from_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.extract_articles.extract_articles_from_xml"><code class="docutils literal notranslate"><span class="pre">extract_articles_from_xml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.extract_articles.load_metadata_info_to_s3"><code class="docutils literal notranslate"><span class="pre">load_metadata_info_to_s3()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.extract_articles.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.extract_articles.save_articles"><code class="docutils literal notranslate"><span class="pre">save_articles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.log_utils">newsfeed.log_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.log_utils.configure_logger"><code class="docutils literal notranslate"><span class="pre">configure_logger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.max_send_to_discord">newsfeed.max_send_to_discord module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.max_send_to_discord.load_summaries"><code class="docutils literal notranslate"><span class="pre">load_summaries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.max_send_to_discord.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.max_send_to_discord.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.max_send_to_discord.send_to_discord"><code class="docutils literal notranslate"><span class="pre">send_to_discord()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.send_to_discord">newsfeed.send_to_discord module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.send_to_discord.load_summaries"><code class="docutils literal notranslate"><span class="pre">load_summaries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.send_to_discord.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.send_to_discord.send_to_discord"><code class="docutils literal notranslate"><span class="pre">send_to_discord()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed.summarize">newsfeed.summarize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.summarize.create_summaries"><code class="docutils literal notranslate"><span class="pre">create_summaries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.summarize.load_articles"><code class="docutils literal notranslate"><span class="pre">load_articles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.summarize.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="newsfeed.html#newsfeed.summarize.save_summaries"><code class="docutils literal notranslate"><span class="pre">save_summaries()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="newsfeed.html#module-newsfeed">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_dag.html">pipeline_dag module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_dag.html#pipeline_dag.tesing_functions"><code class="docutils literal notranslate"><span class="pre">tesing_functions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Agila metoder - Grupp 2</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Grupp 2.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

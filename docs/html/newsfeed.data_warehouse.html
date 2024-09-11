@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>newsfeed.data_warehouse package &#8212; Agila metoder - Grupp 2 2024-09-11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=20e377a9"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="newsfeed-data-warehouse-package">
+<h1>newsfeed.data_warehouse package<a class="headerlink" href="#newsfeed-data-warehouse-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-newsfeed.data_warehouse.database_utils">
+<span id="newsfeed-data-warehouse-database-utils-module"></span><h2>newsfeed.data_warehouse.database_utils module<a class="headerlink" href="#module-newsfeed.data_warehouse.database_utils" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.add_articles">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">add_articles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">articles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.add_articles" title="Link to this definition">¶</a></dt>
+<dd><p>Add articles to the database.
+Args:</p>
+<blockquote>
+<div><p>articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be added.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.create_articles_table">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">create_articles_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.create_articles_table" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the articles table in the database.
+This function executes SQL queries to create a table named {SCHEMA_NAME}.{TABLE_NAME} in the database.
+The table has the following columns:
+- id: SERIAL PRIMARY KEY
+- unique_id: TEXT
+- title: TEXT
+- description: TEXT
+- link: TEXT
+- blog_text: TEXT
+- published: DATE
+- timestamp: TIMESTAMP
+Returns:
+None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.create_connection">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">connection</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">cursor</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.create_connection" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a connection to the PostgreSQL database and returns a tuple containing the connection and cursor objects.
+Returns:</p>
+<blockquote>
+<div><p>tuple: A tuple containing the connection and cursor objects.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.debug_database">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">debug_database</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.debug_database" title="Link to this definition">¶</a></dt>
+<dd><p>Debugs the database by printing information about tables, column names, data types, and first rows.
+Returns:</p>
+<blockquote>
+<div><p>None</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.delete_articles_table">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">delete_articles_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.delete_articles_table" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes the articles table from the database.
+This function executes an SQL query to drop the articles table from the database.
+It first creates a connection and cursor using the create_connection() function.
+Then it executes the SQL query to drop the table if it exists.
+Finally, it commits the changes, closes the cursor and connection.
+Parameters:
+None
+Returns:
+None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.database_utils.load_articles">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.database_utils.</span></span><span class="sig-name descname"><span class="pre">load_articles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.database_utils.load_articles" title="Link to this definition">¶</a></dt>
+<dd><p>Load articles from the database.
+Returns:</p>
+<blockquote>
+<div><p>list[BlogInfo]: A list of BlogInfo instances representing the articles.</p>
+</div></blockquote>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.data_warehouse.save_articles">
+<span id="newsfeed-data-warehouse-save-articles-module"></span><h2>newsfeed.data_warehouse.save_articles module<a class="headerlink" href="#module-newsfeed.data_warehouse.save_articles" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.save_articles.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.save_articles.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.save_articles.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.save_articles.parse_args">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.save_articles.</span></span><span class="sig-name descname"><span class="pre">parse_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Namespace</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.save_articles.parse_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.save_articles.save_articles_data_warehouse">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.save_articles.</span></span><span class="sig-name descname"><span class="pre">save_articles_data_warehouse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">articles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="newsfeed.html#newsfeed.datatypes.BlogInfo" title="newsfeed.datatypes.BlogInfo"><span class="pre">BlogInfo</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.save_articles.save_articles_data_warehouse" title="Link to this definition">¶</a></dt>
+<dd><p>Save articles data to the data warehouse.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>articles (list[BlogInfo]): A list of BlogInfo objects representing the articles to be saved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.data_warehouse.summarize">
+<span id="newsfeed-data-warehouse-summarize-module"></span><h2>newsfeed.data_warehouse.summarize module<a class="headerlink" href="#module-newsfeed.data_warehouse.summarize" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.summarize.main">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.summarize.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blog_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.summarize.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="newsfeed.data_warehouse.summarize.parse_args">
+<span class="sig-prename descclassname"><span class="pre">newsfeed.data_warehouse.summarize.</span></span><span class="sig-name descname"><span class="pre">parse_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Namespace</span></span></span><a class="headerlink" href="#newsfeed.data_warehouse.summarize.parse_args" title="Link to this definition">¶</a></dt>
+<dd><p>Parse command line arguments and return a Namespace object.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>jsonargparse.Namespace: A Namespace object containing the parsed arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-newsfeed.data_warehouse">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-newsfeed.data_warehouse" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Agila metoder - Grupp 2</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Grupp 2.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/newsfeed.data_warehouse.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
